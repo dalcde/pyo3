@@ -455,7 +455,7 @@ fn load_cross_compile_from_sysconfigdata(
     let interpreter_config = InterpreterConfig {
         version: python_version,
         libdir: cross_compile_config.lib_dir.to_str().map(String::from),
-        shared: sysconfig_data.get_bool("Py_ENABLE_SHARED")?,
+        shared: sysconfig_data.get_bool("Py_ENABLE_SHARED"),
         ld_version,
         base_prefix: "".to_string(),
         executable: PathBuf::new(),
@@ -488,7 +488,7 @@ fn load_cross_compile_from_headers(
     let interpreter_config = InterpreterConfig {
         version: python_version,
         libdir: cross_compile_config.lib_dir.to_str().map(String::from),
-        shared: config_data.get_bool("Py_ENABLE_SHARED")?,
+        shared: config_data.get_bool("Py_ENABLE_SHARED").unwrap_or(false),
         ld_version: format!("{}.{}", major, minor),
         base_prefix: "".to_string(),
         executable: PathBuf::new(),
